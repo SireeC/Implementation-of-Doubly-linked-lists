@@ -1,0 +1,169 @@
+// step 01  creating a node class
+
+class Node{
+    int data;
+    Node prev;
+    Node next;
+    
+    
+    // step 02 : creating a constructor 
+    
+      public Node(int data){
+          this.data = data;
+          this.prev = null;
+          this.next = null;
+      }
+}
+
+class DoublyLinkedList {
+    Node head;
+    
+    
+    // creating constructor for DoublyLinkedList
+    
+        public DoublyLinkedList(){
+        this.head = null;
+            
+        }
+        
+        
+        // find middle StackTraceElement
+        
+        public void findMiddle() {
+            if (head == null) {
+                System.out.println("List is empty.");
+                return;
+            }
+
+            Node slow = head;
+            Node fast = head;
+
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            System.out.println("Middle element is: " + slow.data);
+        }
+        
+        // inserting the node  front of the DLL 
+        
+        public void insertingtheNodeFront(int data){
+            Node newNode = new Node(data);
+                if(head !=null){
+                    newNode.next = head;   // current head 
+                    head.prev=newNode;   // prev new node 
+                }
+                head = newNode; // that means head is new node 
+            }
+            
+            // insert the node at the end of the DLL 
+            
+            public void insertingattheEnd(int data){
+                Node newNode = new Node(data);
+                if(head==null){
+                    head = newNode;
+                    return;
+                }
+                
+                Node temp = head;
+                while(temp.next !=null){
+                    temp = temp.next;   // traversing the last node 
+                }
+                
+                temp.next = newNode;
+                newNode.prev = temp;
+
+            }
+            
+            // deleting in the front
+            
+            public void deletingtheFront(){
+                if(head == null){
+                    System.out.println("Empty");
+                    return;
+                }
+                
+                head = head.next;
+                if(head !=null){
+                    head.prev=null;
+                }
+            }
+            
+            // deleting in the end 
+            
+            public void deletingtheEnd(){
+                if(head==null){
+                    System.out.println("Empty");
+                    return;
+                }
+                
+                if(head.next == null){
+                    head=null;
+                    return;
+                }
+                
+                Node temp =head;
+                while( temp.next !=null){
+                    temp = temp.next;
+                }
+                
+                temp.prev.next = null;
+            }
+            
+            
+            
+            // displaying the node of list 
+            
+            public void displayingalltheNodes(){
+                Node temp = head;
+                while(temp !=null){
+                    System.out.print(temp.data + "<->");
+                    temp=temp.next;
+                }
+                
+                System.out.println("NULL");
+            }
+            
+        }
+        
+        
+        // Main Function 
+        
+        public class Main{
+            public static void main(String[] args){
+                DoublyLinkedList lists = new DoublyLinkedList();
+                
+                
+                lists.findMiddle();
+                // Inserting the datas
+                
+                lists.insertingtheNodeFront(100);
+                lists.insertingtheNodeFront(200);
+                lists.insertingattheEnd(300);
+                lists.insertingattheEnd(400);
+                
+                
+                // displayingalltheNodes
+                
+                lists.displayingalltheNodes();
+                
+                // delete from the front 
+                
+                lists.deletingtheFront();
+                lists.displayingalltheNodes();
+                
+                // delete from the end 
+                
+                lists.deletingtheEnd();
+                lists.displayingalltheNodes();
+                
+                lists.findMiddle();
+                
+                
+                System.out.println("After deleting all the nodes");
+                lists.displayingalltheNodes();
+                
+            }
+        }
+    
